@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% from "macros/forms.html" import render_field %}
+
+{% block title %}ログイン{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <h1 class="mb-4">ログイン</h1>
+
+            <form method="POST">
+
+                {{ form.hidden_tag() }}
+
+                {{ render_field(
+                form.username,
+                "ユーザー名"
+                ) }}
+
+                {{ render_field(
+                form.password,
+                "パスワード"
+                ) }}
+
+                {{ form.submit(
+                class="btn btn-primary w-100"
+                ) }}
+
+            </form>
+
+            <div class="text-center mt-3">
+                <a href="{{ url_for('auth.register') }}">
+                    初期登録はこちら
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

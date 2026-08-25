@@ -6,12 +6,20 @@ venv/
 
 # Environment variables
 .env
+keys/
 
 # Flask
 instance/
+*.png
+*.jpg
 
 # IDE
 .vscode/
 
 # macOS
 .DS_Store
+
+# 開発用
+memo.txt
+scripts_test/
+data_test/

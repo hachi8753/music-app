@@ -1,0 +1,2074 @@
+
+/************ PAGE設定 ****************/
+.page-block {
+    width: 100%;
+    font-family: Meiryo, Arial, sans-serif;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+
+.page-title {
+    padding: 0px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.page-body {
+    width: 98%;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+
+.url_list {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.text-input {
+    /* 要素の全ての辺（上、右、下、左）に対して、内側に10pxに設定 */
+    padding: 10px;
+    /* 要素の幅を親要素の80%に設定 */
+    width: 600px;
+    /* 要素のボーダーの角を丸くするために使用 */
+    border-radius: 5px;
+    /* ボーダーを1pxのソリッド（実線）ライトグレー */
+    border: 1px solid #ccc;
+    /* 要素の全ての辺（上、右、下、左）に対して、内側に10pxに設定 */
+    margin: 10px;
+}
+
+/* ボタンのスタイル */
+.button {
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 8px 30px;
+    text-align: center;
+    text-decoration: none;
+
+    border-radius: 10px;
+}
+
+@media (max-width: 1000px) {
+    .page-block {
+        font-size: 20px;
+    }
+
+}
+
+.flex {
+    display: flex;
+    gap: 10px;
+}
+
+/*****************************************/
+
+/************* 基本設定 *******************/
+
+li {
+    list-style: none;
+}
+
+body {
+    padding-top: 58px;
+}
+
+a, a .li, a .div {
+    text-decoration: none;
+    color: inherit;
+}
+
+/************* ヘッダー *******************/
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 30px;
+    width: 84px;
+}
+
+.main-nav {
+    display: flex;
+    font-size: 1.23rem;
+    text-transform: uppercase;
+    list-style: none;
+    gap: 20px;
+}
+
+.main-nav li {
+    margin-left: 10px;
+}
+
+.main-nav a {
+    color: #432;
+    text-decoration: none;
+}
+
+.main-nav a:hover {
+    color: #0bd;
+}
+
+.wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+@media (max-width: 1000px) {
+    .logo {
+        height: 30px;
+        width: 84px;
+    }
+
+    .main-nav {
+        font-size: 2.23rem;
+        gap: 40px;
+    }
+
+
+    /**
+    button {
+        width: 200px;
+        height: 100px;
+        font-size: 50px;
+        color: #fff;
+        background-color: #37b6ff;
+
+        border-radius: 40px;
+        margin: 20px;
+    }
+    */
+}
+
+/************* FORM **********************/
+
+.form-block {
+    padding: 20px;
+}
+
+
+.form-element {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.form-element label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-element input,
+.form-element select,
+.form-element textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-element input:focus,
+.form-element select:focus,
+.form-element textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+.form-submit {
+    text-align: center;
+}
+
+.form-submit input[type="submit"] {
+    padding: 12px 25px;
+    background-color: #3498db;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.form-submit input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+.form-submit input[type="submit"]:active {
+    background-color: #1c6391;
+}
+
+.form-select {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/******************************************/
+
+/************ film_LIST *******************/
+
+.film-list {
+    padding: 0px;
+}
+
+.film-list-row-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.film-list-row {
+    display: flex;
+
+    align-items: center;
+    gap: 10px;
+
+    border-bottom: solid 1px #ccc;
+    min-height: 40px;
+
+    text-decoration: none;
+    color: #000;
+    box-sizing: border-box;
+}
+
+.film-list-row:hover {
+    background-color: #eee;
+}
+
+.film-list-row-header:hover {
+    background-color: #fff;
+}
+
+.film-list-row div {
+    margin: 0 20px;
+}
+
+.film-list-row .no {
+    width: 40px;
+    text-align: center;
+}
+
+.film-list-row .title {
+    min-width: 500px;
+    max-width: 500px;
+}
+
+.film-list-row .ratings {
+    text-align: right;
+    min-width: 40px;
+    max-width: 40px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 1000px) {
+
+    .no {
+        min-width: 90px;
+    }
+    .title {
+        width: 100%;
+        padding: 5px 0;
+    }
+}
+
+.list-link {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    width: 100%;
+    min-height: 40px;
+    box-sizing: border-box;
+}
+/*********** FILM PAGE **************/
+.film-page-header {
+    display: flex;
+    padding: 20px;
+    gap: 10px;
+    width: 100%;
+}
+
+
+.film-image-wrap {
+    min-width: 600px;
+}
+
+.film-image {
+    display: block; /* ブロック表示（中央寄せなどしやすい） */
+    max-width: 600px; /* 最大幅を600pxに制限 */
+    min-width: 600px;
+    width: 100%; /* 親要素の幅に合わせて拡大縮小 */
+    height: auto; /* アスペクト比を維持 */
+    margin: 0 auto; /* 中央寄せ（親がblock要素の場合） */
+    border-radius: 8px; /* 角を少し丸く（お好み） */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.20); /* 軽い影（お好み） */
+}
+
+
+
+.film-information {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
+    gap: 20px;
+}
+
+.film-items {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.film-items-title {
+    border-bottom: solid 0.5px #ccc;
+    padding: 0px 8px;
+}
+
+.film-items .items {
+    padding: none;
+    list-style: none;
+    display: flex;
+    gap: 5px;
+}
+
+.film-items .item {
+    padding: 5px;
+}
+
+.awards {
+    padding: 0 30px;
+}
+
+@media (max-width: 1000px) {
+
+    .film-page-header {
+        padding: 0px;
+    }
+
+    .film-image-wrap {
+        min-width: 400px;
+        padding: 10px 0px;
+    }
+
+    .film-image {
+        display: block;
+        /* ブロック表示（中央寄せなどしやすい） */
+        max-width: 400px;
+        /* 最大幅を600pxに制限 */
+        min-width: 400px;
+        /* 親要素の幅に合わせて拡大縮小 */
+        height: auto;
+        /* アスペクト比を維持 */
+        margin: 0 auto;
+        /* 中央寄せ（親がblock要素の場合） */
+        border-radius: 8px;
+        /* 角を少し丸く（お好み） */
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.20);
+        /* 軽い影（お好み） */
+    }
+
+    .film-information {
+        padding: 10px 0px;
+        gap: 10px;
+    }
+}
+
+/*********** FILM LIST **************/
+.image-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(192px, 1fr));
+    gap: 8px;
+    padding: 0;
+    list-style: none;
+}
+
+.film-card {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.film-card a {
+    width: 192px;
+}
+
+.image-list img {
+    width: 192px;
+    height: 108px;
+    object-fit: cover; /* ← アスペクト比維持でトリミング */
+    object-position: center; /* ← 中央部分を切り取る */
+    border-radius: 10px;
+    display: block;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.24);
+}
+
+.watching-record {
+    display: flex;
+}
+
+.watching-record .date {
+    width: 100px;
+}
+
+
+/*************************************************/
+
+/* 映画の上部情報エリア */
+.film-page-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* 映画情報の右側 */
+.film-information {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 各項目ブロック */
+.film-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.film-items-title {
+    font-weight: bold;
+    color: #555;
+    font-size: 1.1rem;
+    border-left: 4px solid #0078d7;
+    padding-left: 8px;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 0.95rem;
+}
+
+/* 受賞欄（アカデミー賞など） */
+.awards {
+    padding: 10px;
+    background-color: #fff8e1;
+    border-radius: 12px;
+    border-left: 5px solid #ffb300;
+}
+
+.awards .film-items-title {
+    border-left-color: #ffb300;
+}
+
+.watching-history {
+    background: #1c1c1c;
+    color: #f5f5f5;
+    border-radius: 1rem;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Segoe UI', sans-serif;
+    max-width: 800px;
+    margin: 2rem auto;
+}
+
+.watching-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.watching-record {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.watching-record:first-child {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+    color: #ffcc66;
+}
+
+.watching-record .date {
+    flex: 1;
+    text-align: left;
+}
+.watching-record .platforms {
+    flex: 2;
+    text-align: left;
+    display: flex;
+    gap: 10px;
+    line-height: 1.3;
+}
+
+.watching-record .xp {
+    width: 80px;
+    text-align: right;
+    font-weight: bold;
+    color: #ff9966;
+}
+/* 
+--- 交互の背景 --- 
+.watching-record:nth-child(odd):not(:first-child) {
+    background: rgba(255, 255, 255, 0.05);
+} */
+
+/* --- ホバー効果 --- */
+.watching-record:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transition: background 0.2s ease;
+}
+
+/* --- スマホ対応 --- */
+@media (max-width: 480px) {
+    .watching-record {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.3rem;
+    }
+
+    .watching-record .xp {
+        width: auto;
+        color: #ffcc66;
+    }
+    
+    .watching-record .date {
+        text-align: center;
+    }
+
+}
+
+
+
+/************ OSCAR **********************/
+
+.oscar-title {
+    padding: 10px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.page-sub-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.oscar-block {
+    padding: 10px 4%;
+}
+
+.oscar-link-wrap {
+    padding: 10px 4%;
+    display: flex;
+}
+
+.oscar-link {
+    padding: 0 10px;
+}
+
+.oscar-link a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #000;
+    padding: 10px 30px;
+    border-radius: 30px;
+}
+
+.oscar-wrapper {
+    max-width: 1200px;
+}
+
+.list-page {
+    height: 100%;
+    flex: 1;
+}
+
+.container-flex {
+    display: flex;
+    justify-content: center;
+    padding: 0 2%;
+}
+
+.content {
+    flex: 1;
+    overflow-y: auto;
+    margin: 0 0;
+}
+
+.sidebar {
+    background-color: #000000;
+    color: white;
+    padding: 10px;
+    overflow-y: auto;
+
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 120px;
+    height: calc(100vh - 56px);
+}
+
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin: 0 0;
+}
+
+.sidebar button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    padding: 8px 10px;
+}
+
+.sidebar button:hover {
+    background-color: #444;
+}
+
+.sidebar-list-name.active {
+    font-weight: 900;
+    color: white;
+}
+
+.oscar-list-wrap {
+    padding: 7px 0;
+}
+
+
+.oscar-image {
+    position: relative;
+    overflow: hidden;
+    /* 角を丸く見せるために必要 */
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    width: 192px;
+}
+
+/* 
+5: 192 x 108
+6: 160 x 90
+
+*/
+
+.oscar-list-six, 
+.image-list-six {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 4px;
+    padding: 0;
+    list-style: none;
+}
+
+.image-list-watch {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+    gap: 4px;
+    padding: 20px;
+    list-style: none;
+}
+
+.image-list-six {
+    width: 1144px;
+    margin: 0 auto;
+}
+
+.image-list-watch {
+    width: 1180px;
+    max-width: 96%;
+    margin: 0 auto;
+}
+
+@media (max-width: 1000px) {
+    
+    .image-list-watch {
+        width: 884px;
+        margin: 0 auto;
+    }
+
+
+}
+
+
+.oscar-list-six .oscar-image,
+.image-list-six .film-card {
+    width: 160px;
+    border-radius: 8px;
+}
+
+.image-list-watch .film-card {
+    width: 144px;
+    border-radius: 8px;
+}
+
+
+.oscar-list-six img, 
+.image-list-six img {
+    width: 160px;
+    height: 90px;
+}
+
+.image-list-watch img {
+    width: 144px;
+    height: 81px;
+    border-radius: 8px;
+}
+
+
+/* 受賞作ラベル */
+.oscar-label {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(197, 160, 40, 0.7);
+    color: #fff;
+    font-size: 0.5rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.oscar-old-title {
+    padding-top: 30px;
+}
+
+.page-sub-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1256d4;
+    width: auto;
+}
+
+.page-sub-title-margin {
+    margin-top: 10px;
+}
+
+
+.button-wrap {
+    padding: 20px;
+}
+
+.oscar-sub-title {
+    padding: 10px 40px;
+    font-weight: 600;
+}
+
+.oscar-img-dummy {
+    width: 192px;
+    height: 108px;
+}
+
+/* 初期状態（PC） */
+.nav-toggle,
+.hamburger {
+    display: none;
+}
+
+/* スマホ */
+@media (max-width: 1000px) {
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: #333;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    /* チェックされたら表示 */
+    .nav-toggle:checked~.navbar {
+        display: block;
+    }
+
+    .main-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+/*     ポップアップ     */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: #fff;
+    width: 400px;
+    margin: 15% auto;
+    padding: 20px;
+}
+
+
+.navbar .nav-link {
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.navbar .nav-link:hover {
+    color: #ffcc66;
+    border-bottom-color: #ffcc66;
+}
+
+.main-nav {
+    gap: 1.8rem;
+}
+
+.page-header {
+    background-color: #111;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: #111;
+        padding: 1rem 0;
+    }
+
+    .navbar .nav-link {
+        padding: 0.5rem 1rem;
+    }
+}
+
+.container-tight {
+    --bs-gutter-x: 1.5rem;
+}
+
+.poster-shadow {
+    display: block;
+    border-radius: 10%;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+
+.film-poster {
+    width: 100%;
+    height: 108px;
+    /* ← トリミングしたい高さ */
+    object-fit: cover;
+    /* ← アスペクト比維持でトリミング */
+    object-position: center;
+    /* ← 中央トリミング */
+}
+
+@media (min-width: 768px) {
+    .bs-oscar-wrapper {
+        margin-left: 120px;
+    }
+}
+
+.bs-oscar-label {
+    bottom: 8px;
+    left: 8px;
+    background: rgba(197, 160, 40, 0.7);
+    color: #fff;
+    font-size: 0.5rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.oscar-poster {
+    border-radius: 12px;
+}
+
+.container-award {
+    padding: 0 2%;
+}
+
+
+
+@media (max-width: 767px) {
+    .responsive-table thead {
+        display: none;
+    }
+
+    .responsive-table tr {
+        display: block;
+        margin-bottom: 1rem;
+        border: 1px solid #dee2e6;
+        border-radius: .5rem;
+        padding: .5rem;
+    }
+
+    .responsive-table td {
+        display: flex;
+        justify-content: space-between;
+        border: none;
+        padding: .25rem 0;
+        text-align: right
+    }
+
+    .responsive-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #6c757d;
+        white-space: nowrap;
+        flex-shrink: 0;
+        margin-right: 20px;
+    }
+
+    .responsive-table .td-content {
+        display: flex;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: .25rem;
+        text-align: right;
+    }
+}
+
+.overview-toggle-btn {
+    min-width: 7rem;
+    /* ← 表示 / 非表示の長い方に合わせる */
+    text-align: center;
+}
+
+
+.film-card-text {
+    text-decoration: none;
+    color: inherit;
+}
+
+.film-card-text .card {
+    background-color: #fff;
+    transition: background-color 0.15s ease;
+
+    text-wrap: none;
+}
+
+.film-card-text:hover .card {
+    background-color: #f2f2f2;
+}
+
+.film-card-text .film-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.film-card-text .film-english-title {
+    max-width: 70%;
+}
+
+
+.winner-slider {
+    position: relative;
+}
+
+.winner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out;
+}
+
+.winner.active {
+    opacity: 1;
+    position: relative;
+}
+
+td {
+    height: 100%;
+}
+
+td a.d-block {
+    width: 100%;
+    height: 100%;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+.article-item a {
+    color:rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+article {
+    max-width: 900px;
+}
+
+.poster-card {
+    transition: transform 0.2s ease;
+}
+
+.poster-card:hover {
+    transform: scale(1.02);
+}
+
+
+.film-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+    -webkit-line-clamp: 2;
+    /* Chrome / Safari */
+    line-clamp: 2;
+    /* 標準仕様 */
+
+    overflow: hidden;
+}
+
+#filmListContainer-main, #filmListContainer-sub {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.log-tabs-scroll {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    overflow-x: auto;
+    border-bottom: var(--bs-border-width) solid var(--bs-border-color);
+}
+
+.log-tabs-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.log-tabs-scroll .nav {
+    flex-wrap: nowrap;
+    white-space: nowrap;
+}
+
+.log-tabs-scroll .nav-link {
+    white-space: nowrap;
+}
+
+
+.result-pair {
+    display: flex;
+    align-items: flex-start;
+}
+
+.person-box {
+    flex: 9 1 0;
+    aspect-ratio: 1 / 1;
+}
+
+.film-box {
+    flex: 16 1 0;
+    aspect-ratio: 16 / 9;
+}
+
+.result-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.person-results {
+    display: none;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    width: 100%;
+    z-index: 1000;
+
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.result-item:hover {
+    background: #eee;
+    cursor: pointer;
+}
+
+.award-view {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-columns-pc), 1fr);
+    gap: 0.4rem;
+}
+
+@media (max-width: 768px) {
+    .award-view {
+        grid-template-columns: repeat(var(--grid-columns-mobile), 1fr);
+    }
+}
+
+
+/************ PAGE設定 ****************/
+.page-block {
+    width: 100%;
+    font-family: Meiryo, Arial, sans-serif;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+
+.page-title {
+    padding: 0px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.page-body {
+    width: 98%;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+
+.url_list {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.text-input {
+    /* 要素の全ての辺（上、右、下、左）に対して、内側に10pxに設定 */
+    padding: 10px;
+    /* 要素の幅を親要素の80%に設定 */
+    width: 600px;
+    /* 要素のボーダーの角を丸くするために使用 */
+    border-radius: 5px;
+    /* ボーダーを1pxのソリッド（実線）ライトグレー */
+    border: 1px solid #ccc;
+    /* 要素の全ての辺（上、右、下、左）に対して、内側に10pxに設定 */
+    margin: 10px;
+}
+
+/* ボタンのスタイル */
+.button {
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 8px 30px;
+    text-align: center;
+    text-decoration: none;
+
+    border-radius: 10px;
+}
+
+@media (max-width: 1000px) {
+    .page-block {
+        font-size: 20px;
+    }
+
+    .page-title {
+        font-size: 30px;
+    }
+
+}
+
+.flex {
+    display: flex;
+    gap: 10px;
+}
+
+/*****************************************/
+
+/************* 基本設定 *******************/
+
+li {
+    list-style: none;
+}
+
+body {
+    padding-top: 58px;
+}
+
+/************* ヘッダー *******************/
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    height: 30px;
+    width: 84px;
+}
+
+.main-nav {
+    display: flex;
+    font-size: 1.23rem;
+    text-transform: uppercase;
+    list-style: none;
+    gap: 20px;
+}
+
+.main-nav li {
+    margin-left: 10px;
+}
+
+.main-nav a {
+    color: #432;
+    text-decoration: none;
+}
+
+.main-nav a:hover {
+    color: #0bd;
+}
+
+.wrapper {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 2%;
+}
+
+@media (max-width: 1000px) {
+    .logo {
+        height: 30px;
+        width: 84px;
+    }
+
+    .main-nav {
+        font-size: 2.23rem;
+        gap: 40px;
+    }
+
+
+    /**
+    button {
+        width: 200px;
+        height: 100px;
+        font-size: 50px;
+        color: #fff;
+        background-color: #37b6ff;
+
+        border-radius: 40px;
+        margin: 20px;
+    }
+    */
+}
+
+/************* FORM **********************/
+
+.form-block {
+    padding: 20px;
+}
+
+
+.form-element {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.form-element label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-element input,
+.form-element select,
+.form-element textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-element input:focus,
+.form-element select:focus,
+.form-element textarea:focus {
+    border-color: #3498db;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+
+.form-submit {
+    text-align: center;
+}
+
+.form-submit input[type="submit"] {
+    padding: 12px 25px;
+    background-color: #3498db;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.form-submit input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+.form-submit input[type="submit"]:active {
+    background-color: #1c6391;
+}
+
+.form-select {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/******************************************/
+
+/************ film_LIST *******************/
+
+.film-list {
+    padding: 0px;
+}
+
+.film-list-row-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.film-list-row {
+    display: flex;
+
+    align-items: center;
+    gap: 10px;
+
+    border-bottom: solid 1px #ccc;
+    min-height: 40px;
+
+    text-decoration: none;
+    color: #000;
+    box-sizing: border-box;
+}
+
+.film-list-row:hover {
+    background-color: #eee;
+}
+
+.film-list-row-header:hover {
+    background-color: #fff;
+}
+
+.film-list-row div {
+    margin: 0 20px;
+}
+
+.film-list-row .no {
+    width: 40px;
+    text-align: center;
+}
+
+.film-list-row .title {
+    min-width: 500px;
+    max-width: 500px;
+}
+
+.film-list-row .ratings {
+    text-align: right;
+    min-width: 40px;
+    max-width: 40px;
+}
+
+
+/* iPad横サイズ */
+@media (min-width: 1000px) and (max-width: 1024px) {
+    .film-page {
+        font-size: 18px;
+    }
+}
+
+
+/* レスポンシブ対応 */
+@media (max-width: 1000px) {
+
+    .no {
+        min-width: 90px;
+    }
+    .title {
+        width: 100%;
+        padding: 5px 0;
+    }
+}
+
+.list-link {
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    width: 100%;
+    min-height: 40px;
+    box-sizing: border-box;
+}
+/*********** FILM PAGE **************/
+.film-page-header {
+    display: flex;
+    padding: 20px;
+    gap: 10px;
+    width: 100%;
+}
+
+
+.film-image-wrap {
+    min-width: 600px;
+}
+
+.film-image {
+    display: block; /* ブロック表示（中央寄せなどしやすい） */
+    max-width: 600px; /* 最大幅を600pxに制限 */
+    min-width: 600px;
+    width: 100%; /* 親要素の幅に合わせて拡大縮小 */
+    height: auto; /* アスペクト比を維持 */
+    margin: 0 auto; /* 中央寄せ（親がblock要素の場合） */
+    border-radius: 8px; /* 角を少し丸く（お好み） */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.20); /* 軽い影（お好み） */
+}
+
+
+
+.film-information {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0px;
+    gap: 20px;
+}
+
+.film-items {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.film-items-title {
+    border-bottom: solid 0.5px #ccc;
+    padding: 0px 8px;
+}
+
+.film-items .items {
+    padding: none;
+    list-style: none;
+    display: flex;
+    gap: 5px;
+}
+
+.film-items .item {
+    padding: 5px;
+}
+
+.awards {
+    padding: 0 30px;
+}
+
+@media (max-width: 1000px) {
+
+    .film-page-header {
+        padding: 0px;
+    }
+
+    .film-image-wrap {
+        min-width: 400px;
+        padding: 10px 0px;
+    }
+
+    .film-image {
+        display: block;
+        /* ブロック表示（中央寄せなどしやすい） */
+        max-width: 400px;
+        /* 最大幅を600pxに制限 */
+        min-width: 400px;
+        /* 親要素の幅に合わせて拡大縮小 */
+        height: auto;
+        /* アスペクト比を維持 */
+        margin: 0 auto;
+        /* 中央寄せ（親がblock要素の場合） */
+        border-radius: 8px;
+        /* 角を少し丸く（お好み） */
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.20);
+        /* 軽い影（お好み） */
+    }
+
+    .film-information {
+        padding: 10px 0px;
+        gap: 10px;
+    }
+}
+
+/*********** FILM LIST **************/
+.image-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(192px, 1fr));
+    gap: 8px;
+    padding: 0;
+    list-style: none;
+}
+
+.film-card {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.film-card a {
+    width: 192px;
+}
+
+.image-list img {
+    width: 192px;
+    height: 108px;
+    object-fit: cover; /* ← アスペクト比維持でトリミング */
+    object-position: center; /* ← 中央部分を切り取る */
+    border-radius: 10px;
+    display: block;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.24);
+}
+
+.watching-record {
+    display: flex;
+}
+
+.watching-record .date {
+    width: 100px;
+}
+
+
+/*************************************************/
+
+/* 映画の上部情報エリア */
+.film-page-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* 映画情報の右側 */
+.film-information {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 各項目ブロック */
+.film-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.film-items-title {
+    font-weight: bold;
+    color: #555;
+    font-size: 1.1rem;
+    border-left: 4px solid #0078d7;
+    padding-left: 8px;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 0.95rem;
+}
+
+/* 受賞欄（アカデミー賞など） */
+.awards {
+    padding: 10px;
+    background-color: #fff8e1;
+    border-radius: 12px;
+    border-left: 5px solid #ffb300;
+}
+
+.awards .film-items-title {
+    border-left-color: #ffb300;
+}
+
+.watching-history {
+    background: #1c1c1c;
+    color: #f5f5f5;
+    border-radius: 1rem;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: 'Segoe UI', sans-serif;
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+.watching-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.watching-record {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.watching-record:first-child {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    font-weight: bold;
+    color: #ffcc66;
+}
+
+.watching-record .date {
+    flex: 1;
+    text-align: left;
+}
+.watching-record .platforms {
+    flex: 2;
+    text-align: left;
+    display: flex;
+    gap: 10px;
+}
+
+.watching-record .xp {
+    width: 80px;
+    text-align: right;
+    font-weight: bold;
+    color: #ff9966;
+}
+
+/* --- 交互の背景 --- */
+.watching-record:nth-child(odd):not(:first-child) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* --- ホバー効果 --- */
+.watching-record:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transition: background 0.2s ease;
+}
+
+/* --- スマホ対応 --- */
+@media (max-width: 480px) {
+    .watching-record {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+    }
+
+    .watching-record .xp {
+        text-align: left;
+        width: auto;
+        color: #ffcc66;
+    }
+}
+
+
+
+/************ OSCAR **********************/
+
+.oscar-title {
+    padding: 10px;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.page-sub-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.oscar-block {
+    padding: 10px 4%;
+}
+
+.oscar-link-wrap {
+    padding: 10px 4%;
+    display: flex;
+}
+
+.oscar-link {
+    padding: 0 10px;
+}
+
+.oscar-link a {
+    text-decoration: none;
+    color: #fff;
+    background-color: #000;
+    padding: 10px 30px;
+    border-radius: 30px;
+}
+
+.oscar-wrapper {
+    max-width: 1200px;
+}
+
+
+.container-flex {
+    display: flex;
+    justify-content: center;
+    padding: 0 2%;
+}
+
+.content {
+    flex: 1;
+    overflow-y: auto;
+    margin: 0 0;
+}
+
+.sidebar {
+    width: 140px;
+    background-color: #000000;
+    color: white;
+    padding: 10px;
+    overflow-y: auto;
+}
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin: 0 0;
+}
+
+.sidebar button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    padding: 8px 10px;
+}
+
+.sidebar button:hover {
+    background-color: #444;
+}
+
+.sidebar-list-name.active {
+    font-weight: 900;
+    color: white;
+}
+
+.oscar-list-wrap {
+    padding: 7px 0;
+}
+
+
+.oscar-image {
+    position: relative;
+    overflow: hidden;
+    /* 角を丸く見せるために必要 */
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    width: 192px;
+}
+
+/* 
+5: 192 x 108
+6: 160 x 90
+
+*/
+
+.oscar-list-six, 
+.image-list-six {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 4px;
+    padding: 0;
+    list-style: none;
+}
+
+.image-list-watch {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+    gap: 4px;
+    padding: 20px;
+    list-style: none;
+}
+
+.image-list-six {
+    width: 1144px;
+    margin: 0 auto;
+}
+
+.image-list-watch {
+    width: 1180px;
+    max-width: 96%;
+    margin: 0 auto;
+}
+
+@media (max-width: 1000px) {
+    
+    .image-list-watch {
+        width: 884px;
+        margin: 0 auto;
+    }
+
+
+}
+
+
+.oscar-list-six .oscar-image,
+.image-list-six .film-card {
+    width: 160px;
+    border-radius: 8px;
+}
+
+.image-list-watch .film-card {
+    width: 144px;
+    border-radius: 8px;
+}
+
+
+.oscar-list-six img, 
+.image-list-six img {
+    width: 160px;
+    height: 90px;
+}
+
+.image-list-watch img {
+    width: 144px;
+    height: 81px;
+    border-radius: 8px;
+}
+
+
+/* 受賞作ラベル */
+.oscar-label {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background: rgba(197, 160, 40, 0.7);
+    color: #fff;
+    font-size: 0.5rem;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.oscar-old-title {
+    padding-top: 30px;
+}
+
+.page-sub-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1256d4;
+    width: auto;
+}
+
+.page-sub-title-margin {
+    margin-top: 10px;
+}
+
+@media (max-width: 1000px) {
+    .container-flex {
+        display: flex;
+        justify-content: center;
+        height: 76vh;
+        padding: 0 2%;
+    }
+}
+
+.button-wrap {
+    padding: 20px;
+}
+
+.oscar-sub-title {
+    padding: 10px 40px;
+    font-weight: 600;
+}
+
+.oscar-img-dummy {
+    width: 192px;
+    height: 108px;
+}
+
+/* 初期状態（PC） */
+.nav-toggle,
+.hamburger {
+    display: none;
+}
+
+/* スマホ */
+@media (max-width: 1000px) {
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .hamburger span {
+        width: 25px;
+        height: 3px;
+        background: #333;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    /* チェックされたら表示 */
+    .nav-toggle:checked~.navbar {
+        display: block;
+    }
+
+    .main-nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+
+/*     ポップアップ     */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background: #fff;
+    width: 400px;
+    margin: 15% auto;
+    padding: 20px;
+}
+
+
+.navbar .nav-link {
+    color: #fff;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.navbar .nav-link:hover {
+    color: #ffcc66;
+    border-bottom-color: #ffcc66;
+}
+
+.main-nav {
+    gap: 1.8rem;
+}
+
+.page-header {
+    background-color: #111;
+    color: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: #111;
+        padding: 1rem 0;
+    }
+
+    .navbar .nav-link {
+        padding: 0.5rem 1rem;
+    }
+}
+
+.container-tight {
+    --bs-gutter-x: 1.5rem;
+}
