@@ -61,6 +61,11 @@ class Song(db.Model):
         secondary = "user_songs", 
         viewonly = True, 
     )
+    
+    images = db.relationship(
+        "SongImage", 
+        back_populates = "song"
+    )
 
 class Artist(db.Model):
     __tablename__ = "artists"
@@ -91,6 +96,11 @@ class Artist(db.Model):
         back_populates = "artist"
     )
 
+    images = db.relationship(
+        "ArtistImage", 
+        back_populates = "artist"
+    )
+
 class Album(db.Model):
     __tablename__ = "albums"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -116,6 +126,11 @@ class Album(db.Model):
         secondary = "artist_albums", 
         back_populates = "albums"
     )
+    
+    images = db.relationship(
+        "AlbumImage", 
+        back_populates = "album"
+    )
 
 
 class Work(db.Model):
@@ -137,16 +152,23 @@ class Playlist(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(255))
     
+    date_added = db.Column(db.DateTime(timezone=True))
+    last_modified_date = db.Column(db.DateTime(timezone=True))
+    apple_music_id = db.Column(db.String)
+    
     created_at = db.Column(db.DateTime, default=lambda: now_jst)
     updated_at = db.Column(db.DateTime, default=lambda: now_jst, onupdate=lambda: now_jst)
     
-    user_id = db.Column(db.Integer)
-    user_id = db.Column(
-        db.Integer, 
-        db.ForeignKey("users.id"), 
-        nullable = False
+    users = db.relationship(
+        "User",
+        secondary = "user_playlists", 
+        view_only = True
     )
-    user = db.relationship("User", back_populates="playlists")
+    user_playlists = db.relationship(
+        "UserPlaylist", 
+        back_populates = "playlist", 
+        cascade = "all, delete-orphan", 
+    )
     
     songs = db.relationship(
         "Song", 
@@ -162,6 +184,8 @@ class User(db.Model):
     email = db.Column(db.String(255), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     
+    apple_music_user_token = db.Column(db.Text, nullable=True)
+    
     role = db.Column(
         db.Enum("user", "admin", name="user_role"), 
         nullable=False, 
@@ -174,7 +198,13 @@ class User(db.Model):
     
     playlists = db.relationship(
         "Playlist", 
-        back_populates = "user"
+        secondary = "user_playlists", 
+        view_only = True
+    )
+    user_playlists = db.relationship(
+        "UserPlaylist", 
+        back_populates = "user", 
+        cascade = "all, delete-orphan", 
     )
     
     # 中間テーブルUserSongへの参照
@@ -355,57 +385,89 @@ class UserArtist(db.Model):
         back_populates = "user_artists"
     )
 
+
+class UserPlaylist(db.Model):
+    __tablename__ = "user_playlists"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    
+    user_id = db.Column(
+        db.Integer, 
+        db.ForeignKey("users.id"), 
+    )
+    
+    playlist_id = db.Column(
+        db.Integer, 
+        db.ForeignKey("playlists.id"), 
+    )
+    
+    can_edit = db.Column(db.Boolean, default=True)
+    is_library = db.Column(db.Boolean, default=True)
+    
+    created_at = db.Column(db.DateTime, default=lambda: now_jst)
+    updated_at = db.Column(db.DateTime, default=lambda: now_jst, onupdate=lambda: now_jst)
+    
+    user = db.relationship(
+        "User",
+        back_populates = "user_artists", 
+    )
+    
+    playlist = db.relationship(
+        "Playlist", 
+        back_populates = "user_playlists"
+    )
+
+
 # ============================================================================
 # Imageモデル
 # ============================================================================
-# class SongImage(db.Model):
-#     __tablename__ = "song_images"
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+class SongImage(db.Model):
+    __tablename__ = "song_images"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     
-#     song_id = db.Column(
-#         db.Integer, 
-#         db.ForeignKey("songs.id"), 
-#     )
+    song_id = db.Column(
+        db.Integer, 
+        db.ForeignKey("songs.id"), 
+    )
     
-#     song = db.relationship(
-#         "Song", 
-#         back_populates = "images"
-#     )
+    song = db.relationship(
+        "Song", 
+        back_populates = "images"
+    )
 
-#     path = db.Column(db.String)
-#     created_at = db.Column(db.DateTime, default=lambda: now_jst)
-#     updated_at = db.Column(db.DateTime, default=lambda: now_jst, onupdate=lambda: now_jst)
+    path = db.Column(db.String)
+    created_at = db.Column(db.DateTime, default=lambda: now_jst)
+    updated_at = db.Column(db.DateTime, default=lambda: now_jst, onupdate=lambda: now_jst)
 
-# class ArtistImage(db.Model):
-#     __tablename__ = "artist_images"
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+class ArtistImage(db.Model):
+    __tablename__ = "artist_images"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     
-#     artist_id = db.Column(
-#         db.Integer, 
-#         db.ForeignKey("artists.id"), 
-#     )
-#     artist = db.relationship(
-#         "Artist", 
-#         back_populates = "images"
-#     )
+    artist_id = db.Column(
+        db.Integer, 
+        db.ForeignKey("artists.id"), 
+    )
+    artist = db.relationship(
+        "Artist", 
+        back_populates = "images"
+    )
 
-#     path = db.Column(db.String)
-#     created_at = db.Column(db.DateTime, default=lambda: now_jst)
-#     updated_at = db.Column(db.DateTime, default=lambda: now_jst, onupdate=lambda: now_jst)
+    path = db.Column(db.String)
+    created_at = db.Column(db.DateTime, default=lambda: now_jst)
+    updated_at = db.Column(db.DateTime, default=lambda: now_jst, onupdate=lambda: now_jst)
 
-# class AlbumImage(db.Model):
-#     __tablename__ = "album_images"
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+class AlbumImage(db.Model):
+    __tablename__ = "album_images"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     
-#     album_id = db.Column(
-#         db.Integer, 
-#         db.ForeignKey("albums.id"), 
-#     )
-#     album = db.relationship(
-#         "Album", 
-#         back_populates = "images"
-#     )
+    album_id = db.Column(
+        db.Integer, 
+        db.ForeignKey("albums.id"), 
+    )
+    album = db.relationship(
+        "Album", 
+        back_populates = "images"
+    )
     
-#     path = db.Column(db.String)
-#     created_at = db.Column(db.DateTime, default=lambda: now_jst)
-#     updated_at = db.Column(db.DateTime, default=lambda: now_jst, onupdate=lambda: now_jst)
+    path = db.Column(db.String)
+    created_at = db.Column(db.DateTime, default=lambda: now_jst)
+    updated_at = db.Column(db.DateTime, default=lambda: now_jst, onupdate=lambda: now_jst)
