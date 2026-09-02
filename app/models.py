@@ -159,11 +159,6 @@ class Playlist(db.Model):
     created_at = db.Column(db.DateTime, default=lambda: now_jst)
     updated_at = db.Column(db.DateTime, default=lambda: now_jst, onupdate=lambda: now_jst)
     
-    users = db.relationship(
-        "User",
-        secondary = "user_playlists", 
-        view_only = True
-    )
     user_playlists = db.relationship(
         "UserPlaylist", 
         back_populates = "playlist", 
@@ -196,11 +191,6 @@ class User(db.Model):
     updated_at = db.Column(db.DateTime, default=lambda: now_jst, onupdate=lambda: now_jst)
 
     
-    playlists = db.relationship(
-        "Playlist", 
-        secondary = "user_playlists", 
-        view_only = True
-    )
     user_playlists = db.relationship(
         "UserPlaylist", 
         back_populates = "user", 
@@ -220,7 +210,8 @@ class User(db.Model):
     )
     user_artists = db.relationship(
         "UserArtist", 
-        back_populates = "user"
+        back_populates = "user", 
+        cascade = "all, delete-orphan", 
     )
 
 # ============================================================================
@@ -333,12 +324,12 @@ class UserSong(db.Model):
     
     user_id = db.Column(
         db.Integer, 
-        db.ForeignKey("users.id")
+        db.ForeignKey("users.id", name="fk_user_songs_user_id_users")
     )
     
     song_id = db.Column(
         db.Integer, 
-        db.ForeignKey("songs.id")
+        db.ForeignKey("songs.id", name="fk_user_songs_song_id_songs")
     )
     
     is_favorite = db.Column(db.Boolean, default=False)
@@ -364,12 +355,12 @@ class UserArtist(db.Model):
     
     user_id = db.Column(
         db.Integer, 
-        db.ForeignKey("users.id"), 
+        db.ForeignKey("users.id", name="fk_user_artists_user_id_users"), 
     )
     
     artist_id = db.Column(
         db.Integer, 
-        db.ForeignKey("artists.id"), 
+        db.ForeignKey("artists.id", name="fk_user_artists_artist_id_artists"), 
     )
     
     created_at = db.Column(db.DateTime, default=lambda: now_jst)
@@ -392,12 +383,12 @@ class UserPlaylist(db.Model):
     
     user_id = db.Column(
         db.Integer, 
-        db.ForeignKey("users.id"), 
+        db.ForeignKey("users.id", name="fk_user_playlists_user_id_users"), 
     )
     
     playlist_id = db.Column(
         db.Integer, 
-        db.ForeignKey("playlists.id"), 
+        db.ForeignKey("playlists.id", name="fk_user_playlists_playlist_id_playlists"), 
     )
     
     can_edit = db.Column(db.Boolean, default=True)
@@ -408,7 +399,7 @@ class UserPlaylist(db.Model):
     
     user = db.relationship(
         "User",
-        back_populates = "user_artists", 
+        back_populates = "user_playlists", 
     )
     
     playlist = db.relationship(

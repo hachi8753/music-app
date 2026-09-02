@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block header %}
+Mypage
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container py-4">
+
+    <h2 class="fw-bold mb-4">Playlist</h2>
+
+    <div class="page-block">
+    
+        <div class="page-body">
+            <div class="button-wrap">
+                <div>更新</div>
+                <form action="{{ url_for('playlist.sync') }}" method="POST">
+                    <button href="{{ url_for('playlist.sync') }}" class="button"
+                        onclick="confirmAction(event)">Update</button>
+                </form>
+    
+            </div>
+    
+        </div>
+    
+    </div>
+
+</div>
+{% endblock %}

@@ -119,9 +119,10 @@ def get_all_playlists(user):
     
     headers = get_user_headers(user)
     
+    url = f"{BASE_URL}/v1/me/library/playlists"
+    
     while True:
-        url = f"{BASE_URL}/v1/me/library/playlists"
-        
+        print(url)
         response = requests.get(
             url,
             headers=headers,
@@ -131,11 +132,45 @@ def get_all_playlists(user):
         )
         response.raise_for_status()
         result = response.json()
-        
-        data = result['data']
+
         results.extend(result["data"])
         
-        if "next" not in data:
+        if "next" not in result:
             break
+        url = f"{BASE_URL}{result["next"]}"
+        
+    
+    return results
+
+
+def get_all_playlist_songs(user, playlist):
+    
+    results = []
+    limit = 50
+    
+    headers = get_user_headers(user)
+    apple_music_id = playlist.apple_music_id
+    
+    url = f"{BASE_URL}/v1/me/library/playlists/{apple_music_id}/tracks"
+    # url = f"{BASE_URL}/v1/me/library/playlists/p.PkxVB2VUPr6VAzY/tracks
+    
+    while True:
+        print(url)
+        response = requests.get(
+            url,
+            headers=headers,
+            params={
+                "limit": limit,
+            }
+        )
+        response.raise_for_status()
+        result = response.json()
+
+        results.extend(result["data"])
+        
+        if "next" not in result:
+            break
+        url = f"{BASE_URL}{result["next"]}"
+        
     
     return results
