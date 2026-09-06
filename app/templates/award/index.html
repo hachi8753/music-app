@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block header %} TOP | Award {% endblock %}
+
+{% block content %}
+
+<div class="container my-4">
+
+    <h3 class="mb-4">Award</h3>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <tbody>
+                {% for award in awards %}
+                <tr>
+                    <td>{{ award.id }}</td>
+                    <td>{{ award.name }}</td>
+
+                    <td>
+                        <a href="{{ url_for('award.display_year', award_id=award.id) }}">
+                            年別
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('award.display_category', award_id=award.id) }}">
+                            部門別
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('award.index') }}">
+                            年別受賞
+                        </a>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('award.index') }}">
+                            部門別受賞
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-12 col-md-3">
+            <div class="card text-center">
+                <div class="card-header">
+                    <div class="fw-bold">管理画面</div>
+                </div>
+                <div class="card-body">
+                    <div class="row g-3 g-md-3">
+                        <div class="col-12">
+                            <a href="{{ url_for('award.manage_awards') }}" class="btn btn-outline-primary w-100">
+                                Award管理
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

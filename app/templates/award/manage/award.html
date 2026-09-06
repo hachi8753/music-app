@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block header %} 管理 | Award {% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <div class="d-flex align-items-center gap-3 mb-4">
+
+        <a href="{{ url_for('award.manage_awards') }}" class="btn btn-outline-secondary btn-sm">
+            ← 戻る
+        </a>
+
+        <h1 class="mb-0">
+            Award 編集
+        </h1>
+
+    </div>
+
+
+    <form method="POST">
+
+        <!-- 基本情報 -->
+        <div class="card mb-4">
+            <div class="card-header">
+                基本情報
+            </div>
+
+            <div class="card-body">
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        name
+                    </label>
+
+                    <input type="text" name="name" class="form-control" value="{{ award.name or '' }}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        country
+                    </label>
+
+                    <input type="text" name="display_name" class="form-control" value="{{ award.country or '' }}">
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">
+                            priority
+                        </label>
+
+                        <input type="number" name="proprity" class="form-control" value="{{ award.priority or '' }}">
+                    </div>
+
+
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">
+                            grid_columns_pc
+                        </label>
+
+                        <input type="number" name="columns_pc" class="form-control"
+                            value="{{ award.grid_columns_pc or '' }}">
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label">
+                            grid_columns_mobile
+                        </label>
+
+                        <input type="number" name="columns_mobile" class="form-control"
+                            value="{{ award.grid_columns_mobile or '' }}">
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end">
+
+            <button type="submit" class="btn btn-primary">
+                保存
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+{% endblock %}

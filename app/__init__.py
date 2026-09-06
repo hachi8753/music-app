@@ -16,10 +16,14 @@ def create_app():
     # Blueprint
     from .main import main_bp
     from .auth import auth_bp
+    from .song import song_bp
     from .playlist import playlist_bp
+    from .award import award_bp
 
     app.register_blueprint(main_bp)
     app.register_blueprint(auth_bp)
+    app.register_blueprint(song_bp)
     app.register_blueprint(playlist_bp)
+    app.register_blueprint(award_bp)
 
     return app

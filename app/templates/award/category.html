@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="list-page" id="list-page"">
+    <div class=" container-award px-1 px-lg-5">
+
+    <!--  PC用 Sidebar -->
+    <aside class="sidebar d-none d-md-block bg-black">
+        <ul class="nav flex-column py-2">
+            {% for c in categories %}
+            <li class="nav-item">
+                <a href="{{ url_for('award.display_category', award_id=award_id, category_id=c.id) }}">
+                    <button
+                        class="text-white w-100 text-start sidebar-list-name{% if award_category.id == c.id %}fw-bold{% endif %}"
+                        data-category-id="{{ c.id }}">
+                        {{ c.display_group_label }}
+                    </button>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </aside>
+
+    <!-- スマホ用 Sidebar-->
+    <div class="offcanvas offcanvas-start bg-black text-white d-md-none" tabindex="-1" id="yearSidebar">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">YEAR</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column">
+                {% for c in categories %}
+                <li class="nav-item">
+                    <a href="{{ url_for('award.display_category', award_id=award_id, category_id=c.id) }}">
+                        <button class="btn text-white w-100 text-start sidebar-list-name" data-category-id="{{ c.id }}"
+                            data-bs-dismiss="offcanvas">
+                            {{ c.display_group_label }}
+                        </button>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+    <main class="bs-oscar-wrapper bs-award-block">
+        <div class="container-fluid py-3">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <button class="btn btn-outline-dark d-md-none" data-bs-toggle="offcanvas" data-bs-target="#yearSidebar">
+                    ☰
+                </button>
+                <div></div>
+                <div class="oscar-link">
+                    <a href="{{ url_for('award.display_year', award_id=award_category.award.id) }}">年別</a>
+                </div>
+            </div>
+
+            <div class="page-title">{{ award_category.display_group_label }}</div>
+
+            {% for y in years %}
+            {% if y in award_data %}
+            <section class="py-2">
+                <div class="page-title">{{ y }}</div>
+
+                {% for c_label in award_data[y]['category_labels'] %}
+                {% if award_data[y]['display_as_child'] %}
+                {% if loop.index0 > 0 %}
+                <div class="page-sub-title page-sub-title-margin">{{ c_label }}</div>
+                {% else %}
+                <div class="page-sub-title">{{ c_label }}</div>
+                {% endif %}
+                {% endif %}
+                <div class="award-view"
+                    style="--grid-columns-pc: {{ grid_columns_pc }}; --grid-columns-mobile: {{ grid_columns_mobile }};">
+                    {% for song in award_data[y][c_label]['winner'] %}
+                    <div class="">
+                        <div class="position-relative poster-shadow oscar-poster overflow-hidden">
+                            <img src="{{ song['path'] }}"
+                                class="img-fluid rounded shadow-sm">
+                            <span class="bs-oscar-label position-absolute bottom-0 start-0 m-2">
+                                受賞
+                            </span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% for song in award_data[y][c_label]['nominee'] %}
+                    <div class="">
+                        <div class="poster-shadow oscar-poster overflow-hidden">
+                            {% if song['path'] %}
+                            <img src="{{ song['path'] }}"
+                                class="img-fluid rounded shadow-sm">
+                            {% else %}
+                            <img src="{{ url_for('static', filename='images/default-song.png') }}"
+                                class="img-fluid rounded shadow-sm">
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </section>
+            {% endif %}
+
+            {% endfor %}
+        </div>
+    </main>
+</div>
+</div>
+
+<script>
+
+
+</script>
+
+
+{% endblock %}

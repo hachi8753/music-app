@@ -1,0 +1,464 @@
+{% extends "base.html" %}
+
+{% block header %} {{ award_name }} | 年別 {% endblock %}
+
+
+{% block content %}
+
+
+<div class="list-page" id="list-page"">
+    <div class=" container-award px-1 px-lg-5">
+
+    <!--  PC用 Sidebar -->
+    <aside class="sidebar d-none d-md-block bg-black">
+        <ul class="nav flex-column py-2">
+            {% for y in years %}
+            <li class="nav-item">
+                <a href="{{ url_for('award.display_year', award_id=award_id, year=y, mode=mode) }}">
+                    <button class="text-white w-100 text-start sidebar-list-name{% if y == year %}fw-bold{% endif %}"
+                        data-year="{{ y }}">
+                        {{ y }}
+                    </button>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </aside>
+
+    <!-- スマホ用 Sidebar-->
+    <div class="offcanvas offcanvas-start bg-black text-white d-md-none" tabindex="-1" id="yearSidebar">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title">YEAR</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="nav flex-column">
+                {% for y in years %}
+                <li class="nav-item">
+                    <a href="{{ url_for('award.display_year', award_id=award_id, year=y, mode=mode) }}">
+                        <button class="btn text-white w-100 text-start sidebar-list-name" data-year="{{ y }}"
+                            data-bs-dismiss="offcanvas">
+                            {{ y }}
+                        </button>
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+    <main class="bs-oscar-wrapper bs-award-block">
+        <div class="container-fluid py-3">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="page-title">{{ award_name }}</div>
+                <div class="d-flex justify-content-end mb-3">
+                    {% if mode == 'view' %}
+                    <a href="{{ url_for('award.display_year', award_id=award_id, year=year, mode='edit') }}"
+                        class="btn btn-sm btn-outline-secondary">
+                        VIEW
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('award.display_year', award_id=award_id, year=year, mode='view') }}"
+                        class="btn btn-sm btn-outline-primary">
+                        EDIT
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <button class="btn btn-outline-dark d-md-none" data-bs-toggle="offcanvas" data-bs-target="#yearSidebar">
+                    ☰
+                </button>
+                <div></div>
+                <div class="oscar-link">
+                    <a href="{{ url_for('award.index') }}">部門別</a>
+                </div>
+            </div>
+
+            <div class="page-title">{{ year }}</div>
+
+            {% if mode == 'edit' %}
+            {% include "award/display/_year_edit.html" %}
+            {% else %}
+            {% include "award/display/_year_view.html" %}
+            {% endif %}
+        </div>
+    </main>
+</div>
+</div>
+
+<div class="modal fade" id="songSelectModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">作品を選択</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- 検索 -->
+                <input type="text" id="songSearch" class="form-control mb-3" placeholder="作品検索">
+
+                <!-- 一覧 -->
+                <div class="row g-2" id="songList"></div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="awardModal">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">受賞登録</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <!-- AwardResultリスト -->
+                <div id="award-result-container"></div>
+
+                <!-- 追加ボタン -->
+                <button class="btn btn-outline-primary mt-3" onclick="addAwardResult()">
+                    + 受賞を追加
+                </button>
+
+            </div>
+
+            <div class="modal-footer d-flex justify-content-between">
+                <button class="btn btn-danger" onclick="removeAwardResult()">削除</button>
+                <button class="btn btn-primary" onclick="saveAwardResults()">保存</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<template id="award-result-template">
+    <div class="award-result border rounded p-2 mb-3"">
+
+        <div class=" d-flex justify-content-between">
+        <strong>Award Result</strong>
+        <button class="btn btn-sm btn-danger" onclick="removeAwardResult(this)">削除</button>
+    </div>
+
+    <!-- Person -->
+    <div class="mb-2">
+        <label>Person</label>
+
+        <div class="position-relative">
+            <!-- 検索 -->
+            <input type="text" class="form-control person-search" oninput="onPersonInput(this)"
+                onfocus="showResults(this)" onblur="hideResults(this)" placeholder="名前で検索">
+
+            <!-- 候補 -->
+            <div class="person-results"></div>
+        </div>
+
+        <!-- 選択済み -->
+        <div class="person-list d-flex gap-2 flex-wrap mt-1"></div>
+    </div>
+
+    <!-- song -->
+    <div class="mt-2">
+        <label>song</label>
+        <div class="song-list d-flex gap-2 flex-wrap"></div>
+        <button class="btn btn-sm btn-outline-secondary mt-1" onclick="addsong(this)">
+            + Song追加
+        </button>
+    </div>
+
+    </div>
+</template>
+
+<script>
+
+    /* editモード用のスクリプト */
+
+    let currentModal = {
+        awardCategoryId: null,
+        resultType: null,
+        year: null
+    };
+
+    let currentFilledModal = {
+        awardResultId: null
+    }
+
+    document.addEventListener('click', (e) => {
+        console.log("clicked:", e.target);
+    });
+
+    // ＋クリック
+    document.addEventListener("click", (e) => {
+        const el = e.target.closest(".award-slot.empty");
+        if (!el) return;
+
+        const awardCategoryId = el.dataset.awardCategoryId;
+        const resultType = el.dataset.resultType;
+        const year = el.dataset.year;
+
+        openModal(awardCategoryId, resultType, year);
+    });
+
+    // モーダルを開く
+    function openModal(awardCategoryId, resultType, year) {
+        const modalEl = document.getElementById('songSelectModal');
+
+        currentModal = {
+            awardCategoryId,
+            resultType,
+            year
+        };
+
+        modalEl.dataset.awardCategoryId = awardCategoryId;
+        modalEl.dataset.resultType = resultType;
+        modalEl.dataset.year = year;
+
+        loadSongs(year);
+        new bootstrap.Modal(modalEl).show();
+    }
+
+    // Song取得
+    async function loadSongs(year, query = "") {
+        const res = await fetch(`/songs/get?q=${query}`);
+        const songs = await res.json();
+
+        const container = document.getElementById('songList');
+        container.innerHTML = "";
+
+        songs.forEach(song => {
+
+            const image = song.image == null ? "/static/images/default-song.png" : song.image;
+
+            container.innerHTML += `
+            <div class="col-3 col-lg-1">
+                <div class="song-item" data-id="${song.id}">
+                    <img src="${image}" class="img-fluid rounded poster-sm">
+                    <small class="song-title">${song.title}</small>
+                </div>
+            </div>
+        `;
+
+        });
+
+        // attachsongClickEvents();
+    }
+
+    // 検索
+    document.getElementById('songSearch').addEventListener('input', e => {
+        loadSongs(currentModal.year, e.target.value);
+    });
+
+    // 楽曲クリック → 登録
+    document.addEventListener('click', async function (e) {
+        const item = e.target.closest('.song-item');
+        if (!item) return;
+
+        const songId = item.dataset.id;
+
+        await fetch('/awards/award-result/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                song_id: songId,
+                award_category_id: currentModal.awardCategoryId,
+                result_type: currentModal.resultType,
+                year: currentModal.year
+            })
+        });
+
+        console.log(songId);
+
+        location.reload();
+    });
+
+    document.addEventListener("click", (e) => {
+        const el = e.target.closest(".award-slot.filled");
+        if (!el) return;
+
+        const awardResultId = el.dataset.awardResultId;
+
+        openAwardModal(awardResultId);
+    });
+
+    function removeAwardResult() {
+        const awardResultId = currentFilledModal.awardResultId;
+
+        fetch('/award/remove_award_result', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                award_result_id: awardResultId,
+            })
+        });
+
+        location.reload(); // まずはこれでOK
+    }
+
+    function openAwardModal(awardResultId) {
+
+        const modalEl = document.getElementById('awardModal');
+
+        currentFilledModal = {
+            awardResultId
+        };
+
+        modalEl.dataset.awardResultId = awardResultId
+
+        console.log(awardResultId);
+        const result = findResultById(awardResultId);
+        console.log('got result');
+
+        renderModal(result);
+
+        new bootstrap.Modal(modalEl).show();
+    }
+
+    function findResultById(id) {
+        for (const categoryName in awardData) {
+            for (const resultType in awardData[categoryName]['results']) {
+                for (const result of awardData[categoryName]['results'][resultType]) {
+                    if (result.id == id) return result;
+                }
+            }
+        }
+    }
+
+    function renderModal(result) {
+        const container = document.getElementById("award-result-container");
+        container.innerHTML = "";
+
+        const template = document.getElementById("award-result-template");
+        const clone = template.content.cloneNode(true);
+
+        const block = clone.querySelector(".award-result");
+        console.log(result.id);
+        block.dataset.id = result.id;
+
+        // Person
+        const personList = clone.querySelector(".person-list");
+        result.people.forEach(p => {
+            const div = document.createElement("div");
+            div.className = "badge bg-secondary";
+            div.innerText = p.name;
+            div.dataset.id = p.id;
+            personList.appendChild(div);
+        });
+
+        // song
+        const songList = clone.querySelector(".song-list");
+        result.songs.forEach(f => {
+            const div = document.createElement("div");
+            div.className = "badge bg-primary";
+            div.innerText = f.title;
+            div.dataset.id = f.id;
+            songList.appendChild(div);
+        });
+
+        container.appendChild(clone);
+    }
+    function showResults(input) {
+        const list = input.parentElement.querySelector(".person-results");
+        list.style.display = "block";
+    }
+    function hideResults(input) {
+        setTimeout(() => {
+            const list = input.parentElement.querySelector(".person-results");
+            list.style.display = "none";
+        }, 200);
+    }
+
+    async function onPersonInput(input) {
+        const list = input.parentElement.querySelector(".person-results");
+
+        if (!input.value) {
+            list.innerHTML = "";
+            return;
+        }
+
+        const res = await fetch(`/data/person/search?q=${input.value}`);
+        const data = await res.json();
+
+        list.innerHTML = "";
+
+        data.forEach(p => {
+            const div = document.createElement("div");
+            div.className = "p-1 result-item";
+            div.innerText = p.name;
+
+            div.onclick = () => selectPerson(input, p);
+
+            list.appendChild(div);
+        });
+    }
+
+    function selectPerson(input, person) {
+        const container = input.closest(".award-result")
+            .querySelector(".person-list");
+
+        const chip = document.createElement("div");
+        chip.className = "badge bg-secondary";
+        chip.dataset.id = person.id;
+        chip.innerText = person.name;
+
+        container.appendChild(chip);
+
+        // 入力クリア
+        input.value = "";
+
+        // 候補クリア
+        const list = input.parentElement.querySelector(".person-results");
+        list.innerHTML = "";
+    }
+    async function saveAwardResults() {
+
+        const results = [];
+
+        document.querySelectorAll(".award-result").forEach(block => {
+
+            const resultId = block.dataset.id || null;
+
+            const people_ids = [
+                ...block.querySelectorAll(".person-list .badge")
+            ].map(el => el.dataset.id);
+
+            results.push({
+                id: resultId,
+                people_ids: people_ids
+            });
+        });
+
+        console.log(results);
+
+        await fetch("/award/award_results/save_people", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                results: results
+            })
+        });
+
+        // 👇 モーダルを閉じる
+        const modalEl = document.getElementById('awardModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        modal.hide();
+
+        location.reload();
+    }
+
+</script>
+
+<style>
+
+</style>
+
+{% endblock %}

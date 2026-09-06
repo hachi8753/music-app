@@ -1,0 +1,73 @@
+{% for c in categories %}
+<section class="py-2">
+    <div class="page-title">{{ c.name }}</div>
+
+    <div class="award-view"
+        style="--grid-columns-pc: {{ grid_columns_pc }}; --grid-columns-mobile: {{ grid_columns_mobile }};">
+        {% if c.name in award_data and (award_data[c.name]['results']['winner'] | length) > 0 %}
+            {% for result in award_data[c.name]['results']['winner'] %}
+                {% for song in result['songs'] %}
+                <div class="">
+                    <div class="position-relative poster-shadow oscar-poster overflow-hidden award-slot filled"
+                        data-award-result-id="{{ result['id'] }}">
+                        {% if song['path'] %}
+                        <img src="{{ song['path'] }}" class="img-fluid rounded shadow-sm">
+                        {% else %}
+                        <img src="{{ url_for('static', filename='images/default-song.png') }}"
+                            class="img-fluid rounded shadow-sm">
+                        {% endif %}
+                        <span class="bs-oscar-label position-absolute bottom-0 start-0 m-2">
+                            受賞
+                        </span>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endfor %}
+        {% else %}
+        <div class="">
+            <div class="bg-light d-flex align-items-center justify-content-center text-muted award-slot empty h-100 w-100"
+                data-year="{{ year }}" data-award-category-id="{{ c.id }}" data-result-type="winner">
+                +受賞を追加
+            </div>
+        </div>
+        {% endif %}
+        {% if c.name in award_data %}
+        {% for result in award_data[c.name]['results']['nominee'] %}
+        {% for song in result['songs'] %}
+        <div class="">
+            <div class="poster-shadow oscar-poster overflow-hidden award-slot filled"
+                data-award-result-id="{{ result['id'] }}">
+                {% if song['path'] %}
+                <img src="{{ song['path'] }}" class="img-fluid rounded shadow-sm">
+                {% else %}
+                <img src="{{ url_for('static', filename='images/default-song.png') }}"
+                    class="img-fluid rounded shadow-sm">
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+        {% endfor %}
+        {% endif %}
+        <div class="">
+            <div class="bg-light d-flex align-items-center justify-content-center text-muted award-slot empty h-100 w-100"
+                data-year="{{ year }}" data-award-category-id="{{ c.id }}" data-result-type="nominee">
+                +ノミネートを追加
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endfor %}
+
+
+<script id="award-data" type="application/json">
+    {{ award_data | tojson }}
+</script>
+
+<script>
+
+    const awardData = JSON.parse(
+        document.getElementById("award-data").textContent
+    );
+
+</script>

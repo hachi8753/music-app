@@ -1,0 +1,26 @@
+{'data': [{'attributes': {'artwork': {'height': 1200,
+                                      'url': 'https://is1-ssl.mzstatic.com/image/thumb/gen/1200x1200AM.PDCXS11.jpg?c1=FFFFFF&c2=FF8080&c3=FFE6E6&c4=FA233B&signature=d31f442b53afad4466b13baf9c6929de3116698d959c2c8a6c45739e312a37a1&t=V2lubmllIHRoZSBQb29o&tc=FFFFFF&vkey=1',
+                                      'width': 1200},
+                          'canEdit': True,
+                          'dateAdded': '2025-12-12T00:46:44Z',
+                          'hasCatalog': False,
+                          'isPublic': False,
+                          'lastModifiedDate': '2025-12-12T01:32:33Z',
+                          'name': 'Winnie the Pooh',
+                          'playParams': {'id': 'p.AWXoBxQUNDo5Ore',
+                                         'isLibrary': True,
+                                         'kind': 'playlist'}},
+           'href': '/v1/me/library/playlists/p.AWXoBxQUNDo5Ore',
+           'id': 'p.AWXoBxQUNDo5Ore',
+           'type': 'library-playlists'},
+          {'attributes': {'artwork': {'height': 1200,
+                                      'url': 'https://is1-ssl.mzstatic.com/image/thumb/gen/1200x1200AM.PDCXS19.jpg?c1=F5F5F5&c2=FF33BF&c3=FA233B&c4=990006&signature=8f2556bf69977e5c01eaf826f5ad489d79e93656ed37f2051447f49696af9670&t=V0hJVEUgQUxCVU0gU29uZ3M%3D&tc=FFFFFF&vkey=1',
+                                      'width': 1200},
+                          'canEdit': True,
+
+
+
+# Songs
+           'type': 'library-songs'}],
+ 'meta': {'total': 100},
+ 'next': '/v1/me/library/playlists/p.QvDQBd0c7EvPdbq/tracks?offset=25'}

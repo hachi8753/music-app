@@ -1,31 +1,70 @@
 {% extends "base.html" %}
 
 {% block header %}
-Mypage
+プレイリスト
 {% endblock %}
-
 
 {% block content %}
 
 <div class="container py-4">
 
-    <h2 class="fw-bold mb-4">Playlist</h2>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="mb-0">Playlists</h1>
+        <div class="button-wrap">
+            <div>更新</div>
+            <form action="{{ url_for('playlist.sync') }}" method="POST">
+                <button href="{{ url_for('playlist.sync') }}" class="button" onclick="confirmAction(event)">Update</button>
+            </form>
 
-    <div class="page-block">
-    
-        <div class="page-body">
-            <div class="button-wrap">
-                <div>更新</div>
-                <form action="{{ url_for('playlist.sync') }}" method="POST">
-                    <button href="{{ url_for('playlist.sync') }}" class="button"
-                        onclick="confirmAction(event)">Update</button>
-                </form>
-    
-            </div>
-    
         </div>
-    
     </div>
 
+    {% if playlists %}
+
+    <div class="row row-cols-3 row-cols-md-4 row-cols-lg-4 row-cols-xl-6 g-4">
+
+        {% for playlist in playlists %}
+
+        {% set main_image = namespace(image=None) %}
+        {% for playlist_image in playlist.playlist_images %}
+            {% if playlist_image.is_main %}
+                {% set main_image.image = playlist_image.image %}
+            {% endif %}
+        {% endfor %}
+
+        <div class="col">
+
+            <a href="{{ url_for('playlist.detail', playlist_id=playlist.id) }}" class="text-decoration-none text-dark">
+
+                <div class="card h-100">
+
+                    {% if main_image.image %}
+                        <img src="{{ main_image.image.path }}" alt="{{ playlist.name }}" class="card-img-top">
+                    {% else %}
+                        <img src="{{ url_for('static', filename='images/default-song.png') }}" alt="{{ playlist.name }}" class="card-img-top">
+                    {% endif %}
+
+                    <div class="card-body">
+                        <h5 class="card-title mb-0">
+                            {{ playlist.name }}
+                        </h5>
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <p class="text-muted">プレイリストがありません。</p>
+
+    {% endif %}
+
 </div>
+
 {% endblock %}

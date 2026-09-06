@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block header %}
+プレイリスト
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-4">
+
+    <h2 class="mb-4">{{ playlist.name }}</h2>
+
+    {% if song_data_list %}
+
+    <div class="list-group">
+
+        {% for song_data in song_data_list %}
+
+        {% set song = song_data.song %}
+
+        <a href="{{ url_for('main.index') }}" class="list-group-item list-group-item-action">
+
+            <div class="row align-items-center">
+
+                <!-- 曲番号 -->
+                <div class="col-auto text-muted" style="width: 50px;">
+                    {{ loop.index }}
+                </div>
+
+                <!-- ジャケット -->
+                <div class="col-auto">
+                    {% if song_data.path %}
+                    <img src="{{ song_data.path }}" alt="{{ song.title }}" width="56" height="56" class="rounded"
+                        style="object-fit: cover;">
+                    {% else %}
+                    <img src="{{ url_for('static', filename='images/default-song.png') }}" alt="{{ song.title }}"
+                        width="56" height="56" class="rounded">
+                    {% endif %}
+                </div>
+
+                <!-- 曲情報 -->
+                <div class="col">
+                    <div class="fw-semibold">
+                        {{ song.title }}
+                    </div>
+
+                    <div class="text-muted small">
+                        {% if song.artists %}
+                        {{ song.artists | map(attribute='name') | join(', ') }}
+                        {% elif song.artist_name %}
+                        {{ song.artist_name }}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- アルバム -->
+                <div class="col-3 d-none d-md-block text-muted">
+                    {% if song.albums %}
+                    {{ song.albums[0].title }}
+                    {% elif song.album_name %}
+                    {{ song.album_name }}
+                    {% endif %}
+                </div>
+
+                <!-- 再生時間 -->
+                <div class="col-auto text-muted">
+                    {{ (song.duration_in_millis // 60000) }}:{{
+                    "%02d" | format(
+                    (song.duration_in_millis % 60000) // 1000
+                    )
+                    }}
+                </div>
+
+            </div>
+
+        </a>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <p class="text-muted">このプレイリストには曲がありません。</p>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
